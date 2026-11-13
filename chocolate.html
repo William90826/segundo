@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Barra de Chocolate 🍫</title>
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: sans-serif;
+    background: #fdf6e3;
+    margin-top: 40px;
+  }
+  h1 { color: #5a3a1a; }
+  .barra {
+    display: grid;
+    grid-template-columns: repeat(4, 60px);
+    gap: 4px;
+    background: #5a3a1a;
+    padding: 8px;
+    border-radius: 8px;
+  }
+  .cuadrito {
+    width: 60px;
+    height: 60px;
+    background: #7b4b23;
+    border: 2px solid #3e250f;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.15s;
+  }
+  .cuadrito:hover { transform: scale(1.08); }
+  .cuadrito.cortado {
+    background: #fdf6e3;
+    border-style: dashed;
+    cursor: default;
+  }
+  button {
+    margin-top: 20px;
+    padding: 8px 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    background: #7b4b23;
+    color: white;
+    cursor: pointer;
+  }
+  button:hover { background: #5a3a1a; }
+</style>
+</head>
+<body>
+
+<h1>Barra de Chocolate 🍫</h1>
+<p>Haz clic en un cuadrito para cortarlo</p>
+
+<div class="barra" id="barra"></div>
+<button onclick="reiniciar()">🔄 Reiniciar barra</button>
+
+<script>
+  const barra = document.getElementById("barra");
+
+  function crearBarra() {
+    barra.innerHTML = "";
+    for (let i = 0; i < 12; i++) { // 3 filas x 4 columnas
+      const c = document.createElement("div");
+      c.className = "cuadrito";
+      c.textContent = "🍫";
+      c.onclick = () => {
+        if (!c.classList.contains("cortado")) {
+          c.classList.add("cortado");
+          c.textContent = "⬜";
+        }
+      };
+      barra.appendChild(c);
+    }
+  }
+
+  function reiniciar() { crearBarra(); }
+
+  crearBarra();
+</script>
+
+</body>
+</html>
